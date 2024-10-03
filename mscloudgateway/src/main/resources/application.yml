@@ -1,0 +1,49 @@
+spring:
+  application:
+    name: mscloudgateway
+  profiles:
+    active: dev
+  cloud:
+    gateway:
+      routes:
+      - id: msclientes
+        uri: lb://msclientes
+        predicates:
+        - Path=/api/v1/clientes/**
+        filters:
+        - StripPrefix=0
+      - id: msclientes
+        uri: lb://mscartoes
+        predicates:
+        - Path=/api/v1/cartoes/**
+        filters:
+        - StripPrefix=0
+      - id: msavaliadorcredito
+        uri: lb://msavaliadorcredito
+        predicates:
+        - Path=/api/v1/avaliacoes-credito/**
+        filters:
+        - StripPrefix=0
+      discovery:
+          locator:
+            enabled: true
+            lower-case-service-id: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081/realms/msavaliadorcreditorealm
+info:
+  app:
+    name: ${spring.application.name}
+
+eureka:
+  client:
+    fetch-registry: true
+    registerWithEureka: true
+    serviceUrl: 
+      defaultZone: http://mseurekauser:ecok-usr-eeuramssur@localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${server.port}}			
+server:
+  port: 8080	  

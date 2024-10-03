@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: eurekaserver
+  security:
+    basic:
+      enable: true
+    user:
+      name: mseurekauser
+      password: ecok-usr-eeuramssur
+server:
+  port: 8761
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetch-registry: false
+    service-url: 
+      defaultZone: http://${eureka.security.user.name}:${eureka.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+  renewalPercentThreshold: 0.85
+  security:
+    user:
+      name: mseurekauser
+      password: ecok-usr-eeuramssur
+  instance:
+    hostname: eurekaserver
