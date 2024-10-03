@@ -1,5 +1,5 @@
 # mscredito
-Implementação de uma arquitetura completa de microservices para avaliação e solicitação de cartão de crédito
+Implementação de uma arquitetura completa de microserviços para avaliação e solicitação de cartão de crédito
 
 **Tecnologias utilizadas:** <br>
 
